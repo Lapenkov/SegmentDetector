@@ -4,12 +4,10 @@
 int main()
 {
 	using namespace storage;
-	typedef segment< std::string > segment_type; 
-	typedef segment_type::point_type point_type;
 
-	tree< segment_type > t;
-	t.add_segment( segment_type( point_type(), point_type() ) );
-	std::vector< segment_type > f = t.find_segments( point_type(), point_type() );
-
+	tree< segment< int > > t;
+	std::vector< segment< int > > res;
+	t.add_segment( segment< int >( point(), point() ) );
+	t.find_segments( point(), point(), std::back_inserter( res ) );
 	return 0;
 }
