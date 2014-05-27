@@ -58,7 +58,14 @@ namespace storage
 	{
 		if( current_v->is_leaf() )
 		{
+			if( current_v->content.size() < max_content_in_node )
+			{
+				current_v->content.push_back( to_add );
+			}
+			else
+			{
 			
+			}
 		}
 		else
 		{
