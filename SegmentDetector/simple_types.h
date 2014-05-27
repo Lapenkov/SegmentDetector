@@ -1,6 +1,8 @@
 #ifndef _SIMPLE_TYPES_H_DEFINED_
 #define _SIMPLE_TYPES_H_DEFINED_
 
+#include <vector>
+
 namespace storage
 {
 	struct box;
@@ -99,6 +101,7 @@ namespace storage
 		explicit box( const point& low_left, const point& top_right);
 		explicit box();
 
+		static box build_polygon( const std::vector< point >& points );
 		bool in_polygon( const box& other_box ) const;
 		bool overlaps( const box& other_box ) const;
 		unsigned overlap_square( const box& other_box ) const;

@@ -18,11 +18,18 @@ namespace storage
 		std::vector< T > content;
 
 		explicit node();
+		bool is_leaf() const;
 	};
 
 	template< typename T >
 	node< T >::node()
-	{}
+	{
+	}
+	template< typename T >
+	bool node< T >::is_leaf() const
+	{
+		return children.empty();
+	}
 }
 
 #endif //_NODE_H_DEFINED_

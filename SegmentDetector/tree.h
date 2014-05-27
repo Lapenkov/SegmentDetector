@@ -6,11 +6,13 @@
 
 #include <vector>
 #include <iterator>
+#include <limits>
 
 #include <boost/range.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/unordered_set.hpp>
 #include <boost/foreach.hpp>
+#include <boost/assign/list_of.hpp>
 
 namespace storage
 {
@@ -54,7 +56,30 @@ namespace storage
 	template< class T >
 	void tree< T >::add_segment( const T& to_add, vertex* current_v )
 	{
-		
+		if( current_v->is_leaf() )
+		{
+			
+		}
+		else
+		{
+			unsigned min_enlargement = std::numeric_limits< unsigned >::max();
+			vertex* chosen_path = NULL;
+			BOOST_FOREACH( vertex* child, current_v->children )
+			{
+				box new_bounds = box::build_polygon( boost::assign::list_of ( to_add.get_start() )
+																			( to_add.get_end() )
+																			( child->edges.low_left )
+																			( child->edges.top_right ) );
+				unsigned enlargement = new_bounds.square() - child->edges.square();
+				if( enlargement < min_enlargement )
+				{
+					min_enlargement = enlargement;
+					chosen_path = child;
+				}
+			}
+
+			add_segment( to_add, chosen_path );
+		}
 	}
 	template< class T >
 	template< class U >
@@ -68,16 +93,14 @@ namespace storage
 	template< class U >
 	void tree< T >::find_segments( const box& query, std::back_insert_iterator< U > res, const vertex* current_v ) const
 	{
-		if( current_v->children.empty() )
+		if( current_v->is_leaf() )
 		{
-			//leaf node
 			BOOST_FOREACH( const T& segment, current_v->content )
 				if( segment.in_polygon( query ) )
 					( *res++ ) = segment;
 		}
 		else
 		{
-			//non-leaf node
 			BOOST_FOREACH( const vertex* child, current_v->children )
 				if( child->edges.overlaps( query ) )
 					find_segments( query, res, child );

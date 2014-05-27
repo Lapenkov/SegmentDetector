@@ -1,5 +1,8 @@
 #include "simple_types.h"
 
+#include <algorithm>
+#include <limits>
+
 namespace storage
 {
 	size_t point::id_count = 0ul;
@@ -109,5 +112,22 @@ namespace storage
 	unsigned box::square() const
 	{
 		return ( top_right.x - low_left.x ) * ( top_right.y - low_left.y );
+	}
+	box box::build_polygon( const std::vector< point >& points )
+	{
+		int min_x = std::numeric_limits< int >::max();
+		int min_y = std::numeric_limits< int >::max();
+		int max_x = std::numeric_limits< int >::min();
+		int max_y = std::numeric_limits< int >::min();
+
+		for( std::vector< point >::const_iterator cit = points.begin(); cit != points.end(); ++cit )
+		{
+			min_x = std::min( min_x, cit->x );
+			max_x = std::max( max_x, cit->x );
+			min_y = std::min( min_y, cit->y );
+			max_y = std::max( max_y, cit->y );
+		}
+
+		return box( point( min_x, min_y ), point( max_x, max_y ) );
 	}
 }
