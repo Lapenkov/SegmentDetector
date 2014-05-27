@@ -1,0 +1,47 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "ALL_BUILD.vcxproj", "{AE8B5CF7-EF46-4CD5-884A-2759AF72966C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{40BA3B26-0651-4A34-AED6-7831BF3BA896} = {40BA3B26-0651-4A34-AED6-7831BF3BA896}
+		{B6EBFF88-177E-4C4A-8449-5680AA399AE5} = {B6EBFF88-177E-4C4A-8449-5680AA399AE5}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RUN_TESTS", "RUN_TESTS.vcxproj", "{62A2B321-1BD8-441C-86EA-351688FC4F90}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SegmentDetector", "sources\SegmentDetector\SegmentDetector.vcxproj", "{40BA3B26-0651-4A34-AED6-7831BF3BA896}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B6EBFF88-177E-4C4A-8449-5680AA399AE5} = {B6EBFF88-177E-4C4A-8449-5680AA399AE5}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZERO_CHECK", "ZERO_CHECK.vcxproj", "{B6EBFF88-177E-4C4A-8449-5680AA399AE5}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CMakePredefinedTargets", "CMakePredefinedTargets", "{914BEF93-1931-48AF-BE7F-CAC4F7EC3834}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "binaries", "binaries", "{035777CC-D41D-406A-906C-6238DD6C5C25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE8B5CF7-EF46-4CD5-884A-2759AF72966C}.Debug|x64.ActiveCfg = Debug|x64
+		{62A2B321-1BD8-441C-86EA-351688FC4F90}.Debug|x64.ActiveCfg = Debug|x64
+		{40BA3B26-0651-4A34-AED6-7831BF3BA896}.Debug|x64.ActiveCfg = Debug|x64
+		{40BA3B26-0651-4A34-AED6-7831BF3BA896}.Debug|x64.Build.0 = Debug|x64
+		{B6EBFF88-177E-4C4A-8449-5680AA399AE5}.Debug|x64.ActiveCfg = Debug|x64
+		{B6EBFF88-177E-4C4A-8449-5680AA399AE5}.Debug|x64.Build.0 = Debug|x64
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{62A2B321-1BD8-441C-86EA-351688FC4F90} = {914BEF93-1931-48AF-BE7F-CAC4F7EC3834}
+		{B6EBFF88-177E-4C4A-8449-5680AA399AE5} = {914BEF93-1931-48AF-BE7F-CAC4F7EC3834}
+		{40BA3B26-0651-4A34-AED6-7831BF3BA896} = {035777CC-D41D-406A-906C-6238DD6C5C25}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

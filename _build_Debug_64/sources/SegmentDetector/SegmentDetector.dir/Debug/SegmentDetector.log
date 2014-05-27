@@ -1,0 +1,16 @@
+﻿Построение начато 27.05.2014 23:52:08.
+     1>Проект "D:\Programming\git_proj\SegmentDetector\_build_Debug_64\sources\SegmentDetector\SegmentDetector.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /ID:/Programming/boost_1_54_0 /Zi /nologo /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D _CRT_SECURE_NO_WARNINGS /D _WIN32_WINNT=0x0501 /D _SCL_SECURE_NO_WARNINGS /D "SOURCE_DIR=\"D:/Programming/git_proj/SegmentDetector\"" /D "BINARY_DIR=\"D:/Programming/git_proj/SegmentDetector/_build_Debug_64/bin_64/Debug\"" /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHa /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"SegmentDetector.dir\Debug\\" /Fd"SegmentDetector.dir\Debug\vc110.pdb" /Gd /TP /errorReport:prompt ..\..\..\sources\SegmentDetector\main.cpp
+         main.cpp
+     1>d:\programming\git_proj\segmentdetector\sources\segmentdetector\tree.h(73): warning C4700: использована неинициализированная локальная переменная "new_right"
+     1>d:\programming\git_proj\segmentdetector\sources\segmentdetector\tree.h(73): warning C4700: использована неинициализированная локальная переменная "new_left"
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Programming\git_proj\SegmentDetector\_build_Debug_64\bin_64\Debug\SegmentDetector.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\BOOST\lib\libboost_system-vc110-mt-gd-1_54.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Programming/git_proj/SegmentDetector/_build_Debug_64/bin_64/Debug/SegmentDetector.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Programming/git_proj/SegmentDetector/_build_Debug_64/bin_64/Debug/SegmentDetector.lib" /MACHINE:X64  /machine:x64 /debug SegmentDetector.dir\Debug\main.obj
+         SegmentDetector.dir\Debug\simple_types.obj
+         SegmentDetector.vcxproj -> D:\Programming\git_proj\SegmentDetector\_build_Debug_64\bin_64\Debug\SegmentDetector.exe
+     1>Построение проекта "D:\Programming\git_proj\SegmentDetector\_build_Debug_64\sources\SegmentDetector\SegmentDetector.vcxproj" завершено (целевые объекты Build).
+
+Построение успешно завершено.
+
+Затраченное время: 00:00:04.18

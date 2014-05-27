@@ -1,0 +1,3 @@
+D:/Programming/git_proj/SegmentDetector/_build_Debug_64/CMakeFiles/ALL_BUILD.dir
+D:/Programming/git_proj/SegmentDetector/_build_Debug_64/sources/SegmentDetector/CMakeFiles/SegmentDetector.dir
+D:/Programming/git_proj/SegmentDetector/_build_Debug_64/CMakeFiles/ZERO_CHECK.dir

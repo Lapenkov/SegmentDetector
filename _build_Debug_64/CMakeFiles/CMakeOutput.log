@@ -1,0 +1,119 @@
+The system is: Windows - 6.1 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler:  
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+Microsoft (R) Microsoft Visual Studio 2012, версия 11.0.50727.1.
+(C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+1>------ Построение начато: проект: CompilerIdC, Конфигурация: Debug x64 ------
+1>  CMakeCCompilerId.c
+1>  CompilerIdC.vcxproj -> D:\Programming\git_proj\SegmentDetector\_build_Debug_64\CMakeFiles\2.8.12.1\CompilerIdC\.\CompilerIdC.exe
+1>  CMAKE_C_COMPILER=C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\cl.exe
+========== Построение: успешно: 1, с ошибками: 0, без изменений: 0, пропущено: 0 ==========
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+
+The C compiler identification is MSVC, found in "D:/Programming/git_proj/SegmentDetector/_build_Debug_64/CMakeFiles/2.8.12.1/CompilerIdC/CompilerIdC.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler:  
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+Microsoft (R) Microsoft Visual Studio 2012, версия 11.0.50727.1.
+(C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+1>------ Построение начато: проект: CompilerIdCXX, Конфигурация: Debug x64 ------
+1>  CMakeCXXCompilerId.cpp
+1>  CompilerIdCXX.vcxproj -> D:\Programming\git_proj\SegmentDetector\_build_Debug_64\CMakeFiles\2.8.12.1\CompilerIdCXX\.\CompilerIdCXX.exe
+1>  CMAKE_CXX_COMPILER=C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\cl.exe
+========== Построение: успешно: 1, с ошибками: 0, без изменений: 0, пропущено: 0 ==========
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+
+The CXX compiler identification is MSVC, found in "D:/Programming/git_proj/SegmentDetector/_build_Debug_64/CMakeFiles/2.8.12.1/CompilerIdCXX/CompilerIdCXX.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: D:/Programming/git_proj/SegmentDetector/_build_Debug_64/CMakeFiles/CMakeTmp
+
+Run Build Command:C:\PROGRA~2\MICROS~1.0\Common7\IDE\devenv.com CMAKE_TRY_COMPILE.sln /build Debug /project cmTryCompileExec3099650771
+
+Microsoft (R) Microsoft Visual Studio 2012, версия 11.0.50727.1.
+(C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+1>------ Построение начато: проект: cmTryCompileExec3099650771, Конфигурация: Debug x64 ------
+1>  Оптимизирующий компилятор Microsoft (R) C/C++ версии 17.00.50727.1 для x64
+1>  (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+1>  
+1>  cl /c /Zi /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTryCompileExec3099650771.dir\Debug\\" /Fd"cmTryCompileExec3099650771.dir\Debug\vc110.pdb" /Gd /TC /errorReport:prompt testCCompiler.c
+1>  
+1>  testCCompiler.c
+1>  cmTryCompileExec3099650771.vcxproj -> D:\Programming\git_proj\SegmentDetector\_build_Debug_64\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec3099650771.exe
+========== Построение: успешно: 1, с ошибками: 0, без изменений: 0, пропущено: 0 ==========
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: D:/Programming/git_proj/SegmentDetector/_build_Debug_64/CMakeFiles/CMakeTmp
+
+Run Build Command:C:\PROGRA~2\MICROS~1.0\Common7\IDE\devenv.com CMAKE_TRY_COMPILE.sln /build Debug /project cmTryCompileExec2761708802
+
+Microsoft (R) Microsoft Visual Studio 2012, версия 11.0.50727.1.
+(C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+1>------ Построение начато: проект: cmTryCompileExec2761708802, Конфигурация: Debug x64 ------
+1>  Оптимизирующий компилятор Microsoft (R) C/C++ версии 17.00.50727.1 для x64
+1>  (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+1>  
+1>  cl /c /Zi /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTryCompileExec2761708802.dir\Debug\\" /Fd"cmTryCompileExec2761708802.dir\Debug\vc110.pdb" /Gd /TC /errorReport:prompt "C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCCompilerABI.c"
+1>  
+1>  CMakeCCompilerABI.c
+1>  cmTryCompileExec2761708802.vcxproj -> D:\Programming\git_proj\SegmentDetector\_build_Debug_64\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec2761708802.exe
+========== Построение: успешно: 1, с ошибками: 0, без изменений: 0, пропущено: 0 ==========
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: D:/Programming/git_proj/SegmentDetector/_build_Debug_64/CMakeFiles/CMakeTmp
+
+Run Build Command:C:\PROGRA~2\MICROS~1.0\Common7\IDE\devenv.com CMAKE_TRY_COMPILE.sln /build Debug /project cmTryCompileExec1047817723
+
+Microsoft (R) Microsoft Visual Studio 2012, версия 11.0.50727.1.
+(C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+1>------ Построение начато: проект: cmTryCompileExec1047817723, Конфигурация: Debug x64 ------
+1>  Оптимизирующий компилятор Microsoft (R) C/C++ версии 17.00.50727.1 для x64
+1>  (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+1>  
+1>  cl /c /Zi /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTryCompileExec1047817723.dir\Debug\\" /Fd"cmTryCompileExec1047817723.dir\Debug\vc110.pdb" /Gd /TP /errorReport:prompt testCXXCompiler.cxx
+1>  
+1>  testCXXCompiler.cxx
+1>  cmTryCompileExec1047817723.vcxproj -> D:\Programming\git_proj\SegmentDetector\_build_Debug_64\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec1047817723.exe
+========== Построение: успешно: 1, с ошибками: 0, без изменений: 0, пропущено: 0 ==========
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: D:/Programming/git_proj/SegmentDetector/_build_Debug_64/CMakeFiles/CMakeTmp
+
+Run Build Command:C:\PROGRA~2\MICROS~1.0\Common7\IDE\devenv.com CMAKE_TRY_COMPILE.sln /build Debug /project cmTryCompileExec4079715158
+
+Microsoft (R) Microsoft Visual Studio 2012, версия 11.0.50727.1.
+(C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+1>------ Построение начато: проект: cmTryCompileExec4079715158, Конфигурация: Debug x64 ------
+1>  Оптимизирующий компилятор Microsoft (R) C/C++ версии 17.00.50727.1 для x64
+1>  (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+1>  
+1>  cl /c /Zi /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTryCompileExec4079715158.dir\Debug\\" /Fd"cmTryCompileExec4079715158.dir\Debug\vc110.pdb" /Gd /TP /errorReport:prompt "C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXCompilerABI.cpp"
+1>  
+1>  CMakeCXXCompilerABI.cpp
+1>  cmTryCompileExec4079715158.vcxproj -> D:\Programming\git_proj\SegmentDetector\_build_Debug_64\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec4079715158.exe
+========== Построение: успешно: 1, с ошибками: 0, без изменений: 0, пропущено: 0 ==========
+
+
