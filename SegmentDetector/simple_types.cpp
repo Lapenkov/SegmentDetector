@@ -85,17 +85,29 @@ namespace storage
 		, top_right( point( 0, 0 ) )
 	{
 	}
-	bool box::intersects( const box& other_box ) const
+	bool box::in_polygon( const box& other_box ) const
 	{
-		return intersection_square( other_box ) > 0;
+		return ( low_left.in_polygon( other_box ) && top_right.in_polygon( other_box ) );
 	}
-	unsigned box::intersection_square( const box& other_box ) const
+	bool box::overlaps( const box& other_box ) const
+	{
+		return overlap_square( other_box ) > 0;
+	}
+	unsigned box::overlap_square( const box& other_box ) const
 	{
 		if( low_left.in_polygon( other_box ) && !top_right.in_polygon( other_box ) )
 			return ( other_box.top_right.x - low_left.x ) * ( other_box.top_right.y - low_left.y );
 		else if( top_right.in_polygon( other_box ) && !low_left.in_polygon( other_box ) )
 			return ( top_right.x - other_box.low_left.x ) * ( top_right.y - other_box.low_left.y );
-		else 
+		else if( in_polygon( other_box ) )
+			return square();
+		else if( other_box.in_polygon( *this ) )
+			return other_box.square();
+		else
 			return 0;
+	}
+	unsigned box::square() const
+	{
+		return ( top_right.x - low_left.x ) * ( top_right.y - low_left.y );
 	}
 }

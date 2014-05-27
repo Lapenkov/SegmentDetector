@@ -65,7 +65,7 @@ namespace storage
 	{
 		a_ = to.a_;
 		b_ = to.b_;
-		info_ = to.info_
+		info_ = to.info_;
 		return *this;
 	}
 	template< typename T > 
@@ -99,8 +99,10 @@ namespace storage
 		explicit box( const point& low_left, const point& top_right);
 		explicit box();
 
-		bool intersects( const box& other_box ) const;
-		unsigned intersection_square( const box& other_box ) const;
+		bool in_polygon( const box& other_box ) const;
+		bool overlaps( const box& other_box ) const;
+		unsigned overlap_square( const box& other_box ) const;
+		unsigned square() const;
 	};
 }
 

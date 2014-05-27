@@ -10,6 +10,7 @@
 #include <boost/range.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/unordered_set.hpp>
+#include <boost/foreach.hpp>
 
 namespace storage
 {
@@ -33,7 +34,7 @@ namespace storage
 		template< class U > 
 		void find_segments( const box& query, std::back_insert_iterator< U > res ) const; 
 		template< class U > 
-		void find_segments( const box& query, std::back_insert_iterator< U > res, vertex* current_v ) const; 
+		void find_segments( const box& query, std::back_insert_iterator< U > res, const vertex* current_v ) const; 
 	};
 
 	template< class T >
@@ -59,13 +60,28 @@ namespace storage
 	template< class U >
 	void tree< T >::find_segments( const box& query, std::back_insert_iterator< U > res ) const
 	{
+		if( root_ == NULL )
+			return;
 		find_segments( query, res, root_ );
 	}
 	template< class T >
 	template< class U >
-	void tree< T >::find_segments( const box& query, std::back_insert_iterator< U > res, vertex* current_v ) const
+	void tree< T >::find_segments( const box& query, std::back_insert_iterator< U > res, const vertex* current_v ) const
 	{
-		
+		if( current_v->children.empty() )
+		{
+			//leaf node
+			BOOST_FOREACH( const T& segment, current_v->content )
+				if( segment.in_polygon( query ) )
+					( *res++ ) = segment;
+		}
+		else
+		{
+			//non-leaf node
+			BOOST_FOREACH( const vertex* child, current_v->children )
+				if( child->edges.overlaps( query ) )
+					find_segments( query, res, child );
+		}
 	}
 }
 

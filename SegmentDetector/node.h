@@ -12,12 +12,10 @@ namespace storage
 {
 	template< typename T >
 	struct node : private virtual boost::noncopyable
-	{
-		typedef segment< T > segment_t; 
-		
+	{		
 		box edges;
 		std::vector< node* > children;
-		std::vector< segment_t > content;
+		std::vector< T > content;
 
 		explicit node();
 	};
