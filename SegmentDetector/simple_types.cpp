@@ -36,12 +36,13 @@ namespace storage
 	{
 		return ( x < to.x );
 	}
-	bool point::in_polygon( const point& left_bottom, const point& right_top ) const
+	bool point::in_polygon( const point& low_left, const point& top_right ) const
 	{
-		return ( left_to( right_top ) && 
-				below( right_top ) && 
-				above( left_bottom ) && 
-				right_to( left_bottom ) );
+		return ( *this >= low_left && *this <= top_right );
+	}
+	bool point::in_polygon( const box& polygon ) const
+	{
+		return in_polygon( polygon.low_left, polygon.top_right ) ;
 	}
 	bool point::operator ==( const point& to ) const
 	{
@@ -51,8 +52,50 @@ namespace storage
 	{
 		return !( *this == to );
 	}
+	bool point::operator >( const point& to ) const
+	{
+		return ( x > to.x && y > to.y );
+	}
+	bool point::operator >=( const point& to ) const
+	{
+		return ( *this > to || *this == to );
+	}
+	bool point::operator <( const point& to ) const
+	{
+		return ( x < to.x && y < to.y );
+	}
+	bool point::operator <=( const point& to ) const
+	{
+		return ( *this < to || *this == to );
+	}
 	size_t hash_value( const point& value )
     {
         return value.get_id();
     }
+
+	//
+
+	box::box( const point& low_left, const point& top_right )
+		: low_left( low_left )
+		, top_right( top_right )
+	{
+	}
+	box::box()
+		: low_left( point( 0, 0 ) )
+		, top_right( point( 0, 0 ) )
+	{
+	}
+	bool box::intersects( const box& other_box ) const
+	{
+		return intersection_square( other_box ) > 0;
+	}
+	unsigned box::intersection_square( const box& other_box ) const
+	{
+		if( low_left.in_polygon( other_box ) && !top_right.in_polygon( other_box ) )
+			return ( other_box.top_right.x - low_left.x ) * ( other_box.top_right.y - low_left.y );
+		else if( top_right.in_polygon( other_box ) && !low_left.in_polygon( other_box ) )
+			return ( top_right.x - other_box.low_left.x ) * ( top_right.y - other_box.low_left.y );
+		else 
+			return 0;
+	}
 }

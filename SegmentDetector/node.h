@@ -15,15 +15,9 @@ namespace storage
 	{
 		typedef segment< T > segment_t; 
 		
-		bool is_leaf;
+		box edges;
 		std::vector< node* > children;
 		std::vector< segment_t > content;
-		
-		struct 
-		{
-			point left_bottom;
-			point right_top;
-		} edges;
 
 		explicit node();
 	};

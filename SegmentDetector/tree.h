@@ -21,7 +21,7 @@ namespace storage
 
 		typedef std::vector< T > segment_arr;
 		typedef node< T > vertex;
-		vertex* top_;
+		vertex* root_;
 
 	public:
 		explicit tree( const segment_arr& segments );
@@ -31,9 +31,9 @@ namespace storage
 		void add_segment( const T& to_add, vertex* current_v );
 		
 		template< class U > 
-		void find_segments( const point& left_bottom, const point& right_top, std::back_insert_iterator< U > res ) const; 
+		void find_segments( const box& query, std::back_insert_iterator< U > res ) const; 
 		template< class U > 
-		void find_segments( const point& left_bottom, const point& right_top, std::back_insert_iterator< U > res, vertex* current_v ) const; 
+		void find_segments( const box& query, std::back_insert_iterator< U > res, vertex* current_v ) const; 
 	};
 
 	template< class T >
@@ -48,7 +48,7 @@ namespace storage
 	template< class T >
 	void tree< T >::add_segment( const T& to_add )
 	{
-		add_segment( to_add, top_ );
+		add_segment( to_add, root_ );
 	}
 	template< class T >
 	void tree< T >::add_segment( const T& to_add, vertex* current_v )
@@ -57,13 +57,13 @@ namespace storage
 	}
 	template< class T >
 	template< class U >
-	void tree< T >::find_segments( const point& left_bottom, const point& right_top, std::back_insert_iterator< U > res ) const
+	void tree< T >::find_segments( const box& query, std::back_insert_iterator< U > res ) const
 	{
-		find_segments( left_bottom, right_top, res, top_ );
+		find_segments( query, res, root_ );
 	}
 	template< class T >
 	template< class U >
-	void tree< T >::find_segments( const point& left_bottom, const point& right_top, std::back_insert_iterator< U > res, vertex* current_v ) const
+	void tree< T >::find_segments( const box& query, std::back_insert_iterator< U > res, vertex* current_v ) const
 	{
 		
 	}

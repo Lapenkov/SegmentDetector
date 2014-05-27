@@ -3,6 +3,8 @@
 
 namespace storage
 {
+	struct box;
+
 	class point
 	{
 	private:
@@ -21,12 +23,19 @@ namespace storage
 		bool below( const point& to ) const;
 		bool right_to( const point& to ) const;
 		bool left_to( const point& to ) const;
-		bool in_polygon( const point& left_bottom, const point& right_top ) const;
+		bool in_polygon( const point& low_left, const point& top_right ) const;
+		bool in_polygon( const box& polygon ) const;
 		bool operator == ( const point& to ) const;
 		bool operator != ( const point& to ) const;
+		bool operator > ( const point& to ) const;
+		bool operator < ( const point& to ) const;
+		bool operator >= ( const point& to ) const;
+		bool operator <= ( const point& to ) const;
 	};
+
 	//
-	template< class T >
+
+	template< typename T >
 	class segment
 	{	
 	private:
@@ -40,17 +49,18 @@ namespace storage
 
 		const point& get_start() const;
 		const point& get_end() const;
-		bool in_polygon( const point& left_bottom, const point& right_top ) const;
+		bool in_polygon( const point& low_left, const point& top_right ) const;
+		bool in_polygon( const box& polygon ) const;
 	};
 	
-	template< class T >
+	template< typename T >
 	segment< T >::segment( const point& start, const point& end, const T& info )
 		: a_( start )
 		, b_( end )
 		, info_( info )
 	{
 	}
-	template< class T >
+	template< typename T >
 	const segment< T >& segment< T >::operator = ( const segment< T >& to )
 	{
 		a_ = to.a_;
@@ -58,21 +68,40 @@ namespace storage
 		info_ = to.info_
 		return *this;
 	}
-	template< class T > 
+	template< typename T > 
 	const point& segment< T >::get_start() const
 	{
 		return a_;
 	}
-	template< class T > 
+	template< typename T > 
 	const point& segment< T >::get_end() const
 	{
 		return b_;
 	}
-	template< class T >
-	bool segment< T >::in_polygon( const point& left_bottom, const point& right_top ) const
+	template< typename T >
+	bool segment< T >::in_polygon( const point& low_left, const point& top_right ) const
 	{
-		return ( a_.in_polygon( left_bottom, right_top ) && b_.in_polygon( left_bottom, right_top ) ); 
+		return ( a_.in_polygon( low_left, top_right ) && b_.in_polygon( low_left, top_right ) ); 
 	}
+	template< typename T >
+	bool segment< T >::in_polygon( const box& polygon ) const
+	{
+		return ( in_polygon( polygon.low_left, polygon.top_right ) ); 
+	}
+	
+	//
+
+	struct box
+	{
+		point low_left;
+		point top_right;
+
+		explicit box( const point& low_left, const point& top_right);
+		explicit box();
+
+		bool intersects( const box& other_box ) const;
+		unsigned intersection_square( const box& other_box ) const;
+	};
 }
 
 #endif //_SIMPLE_TYPES_H_DEFINED_
