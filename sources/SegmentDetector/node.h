@@ -15,6 +15,7 @@ namespace storage
 	template< typename T >
 	struct node : private virtual boost::noncopyable
 	{		
+		node* parent;
 		box edges;
 		std::vector< node* > children;
 		std::list< T > content;
@@ -26,6 +27,7 @@ namespace storage
 
 	template< typename T >
 	node< T >::node()
+		: parent( NULL )
 	{
 	}
 	template< typename T >

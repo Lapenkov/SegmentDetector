@@ -34,7 +34,6 @@ namespace storage
 		explicit tree();
 
 		void add_segment( const T& to_add );
-		void add_segment( const T& to_add, vertex* current_v );
 		
 		template< class U > 
 		void find_segments( const box& query, std::back_insert_iterator< U > res ) const; 
@@ -43,6 +42,7 @@ namespace storage
 
 	private:
 		void quadratic_split( vertex* to_split, vertex* group1, vertex* group2 ) const;
+		vertex* choose_leaf( const T& to_add );
 	};
 
 	template< class T >
@@ -57,11 +57,7 @@ namespace storage
 	template< class T >
 	void tree< T >::add_segment( const T& to_add )
 	{
-		add_segment( to_add, root_ );
-	}
-	template< class T >
-	void tree< T >::add_segment( const T& to_add, vertex* current_v )
-	{
+		vertex* current_v = choose_leaf( to_add );
 		if( current_v->is_leaf() )
 		{
 			current_v->content.push_back( to_add );
@@ -72,26 +68,6 @@ namespace storage
 
 				quadratic_split( current_v, new_left, new_right );
 			}
-		}
-		else
-		{
-			unsigned min_enlargement = std::numeric_limits< unsigned >::max();
-			vertex* chosen_path = NULL;
-			BOOST_FOREACH( vertex* child, current_v->children )
-			{
-				box new_bounds = box::build_polygon( boost::assign::list_of ( to_add.get_start() )
-																			( to_add.get_end() )
-																			( child->edges.low_left )
-																			( child->edges.top_right ) );
-				unsigned enlargement = new_bounds.square() - child->edges.square();
-				if( enlargement < min_enlargement )
-				{
-					min_enlargement = enlargement;
-					chosen_path = child;
-				}
-			}
-
-			add_segment( to_add, chosen_path );
 		}
 	}
 	template< class T >
@@ -198,7 +174,33 @@ namespace storage
 
 			to_split->content.erase( next_entry );
 		}
-	}
+		template< class T >
+		typename tree< T >::vertex* choose_leaf( const T& to_add )
+		{
+			vertex* result = root_;
+			while( !result->is_leaf() )
+			{
+				unsigned min_enlargement = std::numeric_limits< unsigned >::max();
+				vertex* chosen_path = NULL;
+				BOOST_FOREACH( vertex* child, current_v->children )
+				{
+					box new_bounds = box::build_polygon( boost::assign::list_of ( to_add.get_start() )
+																				( to_add.get_end() )
+																				( child->edges.low_left )
+																				( child->edges.top_right ) );
+					unsigned enlargement = new_bounds.square() - child->edges.square();
+					if( enlargement < min_enlargement )
+					{
+						min_enlargement = enlargement;
+						chosen_path = child;
+					}
+				}
+				result = chosen_path;
+			}
+
+			return result;
+		}
+	};
 }
 
 #endif //_TREE_H_DEFINED_
