@@ -24,10 +24,6 @@ namespace storage
 		explicit point( const int x = 0, const int y = 0 );
 		const point& operator = ( const point& to );
 
-		bool above( const point& to ) const;
-		bool below( const point& to ) const;
-		bool right_to( const point& to ) const;
-		bool left_to( const point& to ) const;
 		bool in_polygon( const point& low_left, const point& top_right ) const;
 		bool in_polygon( const box& polygon ) const;
 		bool operator == ( const point& to ) const;

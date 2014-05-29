@@ -47,22 +47,6 @@ namespace storage
 		y = to.y;
 		return *this;
 	}
-	bool point::above( const point& to ) const
-	{
-		return ( y > to.y );
-	}
-	bool point::below( const point& to ) const
-	{
-		return ( y < to.y );
-	}
-	bool point::right_to( const point& to ) const
-	{
-		return ( x > to.x );
-	}
-	bool point::left_to( const point& to ) const
-	{
-		return ( x < to.x );
-	}
 	bool point::in_polygon( const point& low_left, const point& top_right ) const
 	{
 		return ( *this >= low_left && *this <= top_right );
@@ -85,7 +69,7 @@ namespace storage
 	}
 	bool point::operator >=( const point& to ) const
 	{
-		return ( *this > to || *this == to );
+		return ( x >= to.x && y >= to.y );
 	}
 	bool point::operator <( const point& to ) const
 	{
@@ -93,7 +77,7 @@ namespace storage
 	}
 	bool point::operator <=( const point& to ) const
 	{
-		return ( *this < to || *this == to );
+		return ( x <= to.x && y <= to.y );
 	}
 
 	//
