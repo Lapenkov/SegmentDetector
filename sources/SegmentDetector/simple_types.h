@@ -1,11 +1,20 @@
 #ifndef _SIMPLE_TYPES_H_DEFINED_
 #define _SIMPLE_TYPES_H_DEFINED_
 
-#include <vector>
+#include <list>
 
 namespace storage
 {
 	struct box;
+	class point;
+
+	namespace detail
+	{
+		void update_edges( box& old, const point& to_include );
+		void update_edges( box& old, const box& to_include );
+		box get_edges( box& obj1, const point& obj2 );
+		box get_edges( box& obj1, const box& obj2 );
+	}
 
 	class point
 	{
@@ -49,7 +58,7 @@ namespace storage
 		explicit box( const point& low_left, const point& top_right);
 		explicit box();
 
-		static box build_polygon( const std::vector< point >& points );
+		static box build_polygon( const std::list< point >& points );
 		bool in_polygon( const box& other_box ) const;
 		bool overlaps( const box& other_box ) const;
 		unsigned overlap_square( const box& other_box ) const;

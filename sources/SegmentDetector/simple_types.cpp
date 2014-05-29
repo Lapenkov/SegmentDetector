@@ -3,8 +3,39 @@
 #include <algorithm>
 #include <limits>
 
+#include <boost/assign/list_of.hpp>
+
 namespace storage
 {
+	namespace detail
+	{
+		void update_edges( box& old, const point& to_include )
+		{
+			old = box::build_polygon( boost::assign::list_of( old.low_left )
+															( old.top_right) 
+															( to_include ) );
+		}
+		void update_edges( box& old, const box& to_include )
+		{
+			old = box::build_polygon( boost::assign::list_of( old.low_left )
+															( old.top_right) 
+															( to_include.low_left )
+															( to_include.top_right ) );
+		}
+		box get_edges( box& obj1, const point& obj2 )
+		{
+			return box::build_polygon( boost::assign::list_of( obj1.low_left )
+															( obj1.top_right) 
+															( obj2 ) );
+		}
+		box get_edges( box& obj1, const box& obj2 )
+		{
+			return box::build_polygon( boost::assign::list_of( obj1.low_left )
+															( obj1.top_right) 
+															( obj2.low_left )
+															( obj2.top_right ) );
+		}
+	}
 	size_t point::id_count = 0ul;
 
 	point::point( const int x, const int y )
@@ -113,14 +144,14 @@ namespace storage
 	{
 		return ( top_right.x - low_left.x ) * ( top_right.y - low_left.y );
 	}
-	box box::build_polygon( const std::vector< point >& points )
+	box box::build_polygon( const std::list< point >& points )
 	{
 		int min_x = std::numeric_limits< int >::max();
 		int min_y = std::numeric_limits< int >::max();
 		int max_x = std::numeric_limits< int >::min();
 		int max_y = std::numeric_limits< int >::min();
 
-		for( std::vector< point >::const_iterator cit = points.begin(); cit != points.end(); ++cit )
+		for( std::list< point >::const_iterator cit = points.begin(); cit != points.end(); ++cit )
 		{
 			min_x = std::min( min_x, cit->x );
 			max_x = std::max( max_x, cit->x );

@@ -3,7 +3,6 @@
 
 #include "simple_types.h"
 
-#include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/assign/list_of.hpp>
 
@@ -14,15 +13,16 @@ namespace storage
 {
 	template< typename T >
 	struct node : private virtual boost::noncopyable
-	{		
+	{
 		node* parent;
 		box edges;
-		std::vector< node* > children;
-		std::list< T > content;
+		std::list< node* > children;
+		std::list< T* > content;
 
 		explicit node();
 		bool is_leaf() const;
-		void add_content( const T& to_add );
+		void resolve_edges();
+		const box& get_edges() const;
 	};
 
 	template< typename T >
@@ -36,20 +36,35 @@ namespace storage
 		return children.empty();
 	}
 	template< typename T >
-	void node< T >::add_content( const T& to_add )
+	void node< T >::resolve_edges()
 	{
-		if( content.empty() )
+		std::list< point > all_points;
+		all_points.push_back( edges.low_left );
+		all_points.push_back( edges.top_right );
+
+		if( is_leaf() )
 		{
-			content.push_back( to_add );
-			edges = box( to_add );
+			for( std::list< T* >::const_iterator cit = content.begin(); cit != content.end(); ++cit )
+			{
+				all_points.push_back( (*cit)->get_edges().low_left );
+				all_points.push_back( (*cit)->get_edges().top_right );
+			}
 		}
 		else
 		{
-			edges = box::build_polygon( boost::assign::list_of( edges.low_left )
-															  (	edges.top_right )
-															  ( to_add.get_start() ) 
-															  (	to_add.get_end() ) );
+			for( std::list< node* >::const_iterator cit = children.begin(); cit != children.end(); ++cit )
+			{
+				all_points.push_back( (*cit)->get_edges().low_left );
+				all_points.push_back( (*cit)->get_edges().top_right );
+			}
 		}
+
+		edges = box::build_polygon( all_points );
+	}
+	template< typename T >
+	const box& node< T >::get_edges() const
+	{
+		return edges;
 	}
 }
 
