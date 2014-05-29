@@ -1,8 +1,8 @@
-# Install script for directory: D:/Programming/git_proj/SegmentDetector/tests
+# Install script for directory: D:/usr/test/SegmentDetector/tests
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "C:/Program Files/SegmentDetector")
+  SET(CMAKE_INSTALL_PREFIX "C:/Program Files/puzzle_5_week_solutions")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

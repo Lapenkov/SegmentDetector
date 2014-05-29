@@ -1,8 +1,8 @@
-# Install script for directory: D:/Programming/git_proj/SegmentDetector
+# Install script for directory: D:/usr/test/SegmentDetector
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "C:/Program Files/SegmentDetector")
+  SET(CMAKE_INSTALL_PREFIX "C:/Program Files/puzzle_5_week_solutions")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -29,8 +29,8 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("D:/Programming/git_proj/SegmentDetector/_build_Debug_64/sources/cmake_install.cmake")
-  INCLUDE("D:/Programming/git_proj/SegmentDetector/_build_Debug_64/tests/cmake_install.cmake")
+  INCLUDE("D:/usr/test/SegmentDetector/_build_Debug_64/sources/cmake_install.cmake")
+  INCLUDE("D:/usr/test/SegmentDetector/_build_Debug_64/tests/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -40,7 +40,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "D:/Programming/git_proj/SegmentDetector/_build_Debug_64/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "D:/usr/test/SegmentDetector/_build_Debug_64/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "D:/Programming/git_proj/SegmentDetector/_build_Debug_64/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "D:/usr/test/SegmentDetector/_build_Debug_64/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)
