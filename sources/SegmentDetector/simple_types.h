@@ -70,8 +70,8 @@ namespace storage
 	{
 		int x1, y1, x2, y2;
 		x1 = axis.get_start().x;
-		y1 = axis.get_end().y;
-		x2 = axis.get_start().x;
+		y1 = axis.get_start().y;
+		x2 = axis.get_end().x;
 		y2 = axis.get_end().y;
 		if( x1 > x2 )
 			std::swap( x1, x2 );
@@ -100,6 +100,7 @@ namespace storage
 		bool in_polygon( const point& low_left, const point& top_right ) const;
 		bool in_polygon( const box& polygon ) const;
 		const box get_edges() const;
+		const T& get_info() const;
 	};
 	
 	template< typename T >
@@ -141,6 +142,11 @@ namespace storage
 	const box segment< T >::get_edges() const
 	{
 		return box( *this );
+	}
+	template< typename T >
+	const T& segment< T >::get_info() const
+	{
+		return info_;
 	}
 }
 

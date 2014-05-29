@@ -52,10 +52,12 @@ namespace storage
 
 	template< class T >
 	tree< T >::tree()
+		: root_( new vertex() )
 	{
 	}
 	template< class T >
 	tree< T >::tree( const segment_arr& segments )
+		: root_( new vertex() )
 	{
 		boost::range::for_each( segments.begin(), segments.end(), add_segment( boost::lambda::_1 ) );
 	}
@@ -88,8 +90,6 @@ namespace storage
 	template< class U >
 	void tree< T >::find_segments( const box& query, std::back_insert_iterator< U > res ) const
 	{
-		if( root_ == NULL )
-			return;
 		find_segments( query, res, root_ );
 	}
 	template< class T >
@@ -237,7 +237,8 @@ namespace storage
 	template< class T >
 	void tree< T >::adjust_tree( vertex* current_v, vertex* child1, vertex* child2 )
 	{
-		assert( current_v != NULL );
+		if( current_v == NULL )
+			return;
 		vertex* parent = current_v->parent;
 
 		current_v->children.push_back( child1 );
