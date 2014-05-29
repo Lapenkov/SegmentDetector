@@ -36,12 +36,9 @@ namespace storage
 															( obj2.top_right ) );
 		}
 	}
-	size_t point::id_count = 0ul;
-
 	point::point( const int x, const int y )
 		: x( x )
 		, y( y )
-		, id_( ++id_count )
 	{
 	}
 	const point& point::operator = ( const point& to )
@@ -49,10 +46,6 @@ namespace storage
 		x = to.x;
 		y = to.y;
 		return *this;
-	}
-	size_t point::get_id() const 
-	{
-		return id_;
 	}
 	bool point::above( const point& to ) const
 	{
@@ -102,10 +95,6 @@ namespace storage
 	{
 		return ( *this < to || *this == to );
 	}
-	size_t hash_value( const point& value )
-    {
-        return value.get_id();
-    }
 
 	//
 

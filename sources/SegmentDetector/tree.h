@@ -78,7 +78,18 @@ namespace storage
 			vertex* new_right = new vertex();
 
 			quadratic_split( current_v, new_left, new_right );
-			adjust_tree( current_v->parent, new_left, new_right );
+
+			if( current_v->parent == NULL )
+			{
+				root_ = new vertex();
+				root_->children.push_back( new_left );
+				root_->children.push_back( new_right );
+				root_->resolve_edges();
+			}
+			else
+			{
+				adjust_tree( current_v->parent, new_left, new_right );
+			}
 			delete current_v;
 		}
 		else
@@ -259,6 +270,7 @@ namespace storage
 				root_ = new vertex();
 				root_->children.push_back( new_left );
 				root_->children.push_back( new_right );
+				root_->resolve_edges();
 			}
 			else
 			{

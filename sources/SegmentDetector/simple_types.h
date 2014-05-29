@@ -6,7 +6,7 @@
 namespace storage
 {
 	struct box;
-	class point;
+	struct point;
 
 	namespace detail
 	{
@@ -16,20 +16,14 @@ namespace storage
 		box get_edges( box& obj1, const box& obj2 );
 	}
 
-	class point
+	struct point
 	{
-	private:
-		static size_t id_count;
-		const size_t id_;
-
-	public:
 		int x;
 		int y;
 
 		explicit point( const int x = 0, const int y = 0 );
 		const point& operator = ( const point& to );
 
-		size_t get_id() const;
 		bool above( const point& to ) const;
 		bool below( const point& to ) const;
 		bool right_to( const point& to ) const;
