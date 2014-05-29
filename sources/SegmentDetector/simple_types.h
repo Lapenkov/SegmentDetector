@@ -36,6 +36,43 @@ namespace storage
 	};
 
 	//
+	template< typename T >
+	class segment;
+
+	struct box
+	{
+		point low_left;
+		point top_right;
+
+		template< typename T >
+		explicit box( segment< T > axis );
+		explicit box( const point& low_left, const point& top_right);
+		explicit box();
+
+		static box build_polygon( const std::vector< point >& points );
+		bool in_polygon( const box& other_box ) const;
+		bool overlaps( const box& other_box ) const;
+		unsigned overlap_square( const box& other_box ) const;
+		unsigned square() const;
+	};
+
+	template< typename T >
+	box::box( segment< T > axis )
+	{
+		int x1, y1, x2, y2;
+		x1 = axis.get_start().x;
+		y1 = axis.get_end().y;
+		x2 = axis.get_start().x;
+		y2 = axis.get_end().y;
+		if( x1 > x2 )
+			std::swap( x1, x2 );
+		if( y1 > y2 )
+			std::swap( y1, y2 );
+		low_left = point( x1, y1 );
+		top_right = point( x2, y2 );
+	}
+
+	//
 
 	template< typename T >
 	class segment
@@ -53,6 +90,7 @@ namespace storage
 		const point& get_end() const;
 		bool in_polygon( const point& low_left, const point& top_right ) const;
 		bool in_polygon( const box& polygon ) const;
+		const box get_edges() const;
 	};
 	
 	template< typename T >
@@ -90,40 +128,10 @@ namespace storage
 	{
 		return ( in_polygon( polygon.low_left, polygon.top_right ) ); 
 	}
-	
-	//
-
-	struct box
-	{
-		point low_left;
-		point top_right;
-
-		template< typename T >
-		explicit box( segment< T > axis );
-		explicit box( const point& low_left, const point& top_right);
-		explicit box();
-
-		static box build_polygon( const std::vector< point >& points );
-		bool in_polygon( const box& other_box ) const;
-		bool overlaps( const box& other_box ) const;
-		unsigned overlap_square( const box& other_box ) const;
-		unsigned square() const;
-	};
-
 	template< typename T >
-	box::box( segment< T > axis )
+	const box segment< T >::get_edges() const
 	{
-		int x1, y1, x2, y2;
-		x1 = axis.get_start().x;
-		y1 = axis.get_end().y;
-		x2 = axis.get_start().x;
-		y2 = axis.get_end().y;
-		if( x1 > x2 )
-			std::swap( x1, x2 );
-		if( y1 > y2 )
-			std::swap( y1, y2 );
-		low_left = point( x1, y1 );
-		top_right = point( x2, y2 );
+		return box( *this );
 	}
 }
 

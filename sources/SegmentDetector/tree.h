@@ -26,7 +26,7 @@ namespace storage
 
 		typedef std::vector< T > segment_arr;
 		typedef std::list< T > segment_list;
-		typedef node< T > vertex;
+		typedef node vertex;
 		vertex* root_;
 
 	public:
@@ -34,7 +34,6 @@ namespace storage
 		explicit tree();
 
 		void add_segment( const T& to_add );
-		
 		template< class U > 
 		void find_segments( const box& query, std::back_insert_iterator< U > res ) const; 
 		template< class U > 
@@ -43,6 +42,7 @@ namespace storage
 	private:
 		void quadratic_split( vertex* to_split, vertex* group1, vertex* group2 ) const;
 		vertex* choose_leaf( const T& to_add );
+		void adjust_tree( vertex* current_v, vertex* child1, vertex* child2 );
 	};
 
 	template< class T >
@@ -58,16 +58,21 @@ namespace storage
 	void tree< T >::add_segment( const T& to_add )
 	{
 		vertex* current_v = choose_leaf( to_add );
-		if( current_v->is_leaf() )
+		current_v->add_content( to_add );
+		if( current_v->parent != NULL )
+			current_v->parent->content.remove( current_v );
+		if( current_v->content.size() > max_content_in_node )
 		{
-			current_v->content.push_back( to_add );
-			if( current_v->content.size() > max_content_in_node )
-			{
-				vertex* new_left;
-				vertex* new_right;
+			vertex* new_left;
+			vertex* new_right;
 
-				quadratic_split( current_v, new_left, new_right );
-			}
+			quadratic_split( current_v, new_left, new_right );
+			adjust_tree( current_v->parent, new_left, new_right );
+			delete current_v;
+		}
+		else
+		{
+			adjust_tree( current_v->parent, current_v, NULL );
 		}
 	}
 	template< class T >
@@ -174,33 +179,59 @@ namespace storage
 
 			to_split->content.erase( next_entry );
 		}
-		template< class T >
-		typename tree< T >::vertex* choose_leaf( const T& to_add )
+	}
+	template< class T >
+	typename tree< T >::vertex* choose_leaf( const T& to_add )
+	{
+		vertex* result = root_;
+		while( !result->is_leaf() )
 		{
-			vertex* result = root_;
-			while( !result->is_leaf() )
+			unsigned min_enlargement = std::numeric_limits< unsigned >::max();
+			vertex* chosen_path = NULL;
+			BOOST_FOREACH( vertex* child, current_v->children )
 			{
-				unsigned min_enlargement = std::numeric_limits< unsigned >::max();
-				vertex* chosen_path = NULL;
-				BOOST_FOREACH( vertex* child, current_v->children )
+				box new_bounds = box::build_polygon( boost::assign::list_of ( to_add.get_start() )
+																			( to_add.get_end() )
+																			( child->edges.low_left )
+																			( child->edges.top_right ) );
+				unsigned enlargement = new_bounds.square() - child->edges.square();
+				if( enlargement < min_enlargement )
 				{
-					box new_bounds = box::build_polygon( boost::assign::list_of ( to_add.get_start() )
-																				( to_add.get_end() )
-																				( child->edges.low_left )
-																				( child->edges.top_right ) );
-					unsigned enlargement = new_bounds.square() - child->edges.square();
-					if( enlargement < min_enlargement )
-					{
-						min_enlargement = enlargement;
-						chosen_path = child;
-					}
+					min_enlargement = enlargement;
+					chosen_path = child;
 				}
-				result = chosen_path;
 			}
-
-			return result;
+			result = chosen_path;
 		}
-	};
+
+		return result;
+	}
+	template< class T >
+	void tree< T >::adjust_tree( vertex* current_v, vertex* child1, vertex* child2 )
+	{
+		if( current_v == NULL )
+			return;
+		if( current_v->parent != NULL )
+			current_v->parent->content.remove( current_v );
+		current_v->add_child( child1 );
+		if( child2 != NULL )
+			current_v->add_child( child2 );
+
+		if( current_v->children.size() > max_content_in_node )
+		{
+			vertex* new_left;
+			vertex* new_right;
+
+			quadratic_split( current_v, new_left, new_right );
+			adjust_tree( current_v->parent, new_left, new_right );
+			delete current_v;
+		}
+		else 
+		{
+			adjust_tree( current_v->parent, current_v, NULL );
+		}
+
+	}
 }
 
 #endif //_TREE_H_DEFINED_
