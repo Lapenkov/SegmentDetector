@@ -22,18 +22,10 @@ namespace storage
 															( to_include.low_left )
 															( to_include.top_right ) );
 		}
-		box get_edges( box& obj1, const point& obj2 )
+		box get_edges( point& obj1, const point& obj2 )
 		{
-			return box::build_polygon( boost::assign::list_of( obj1.low_left )
-															( obj1.top_right) 
-															( obj2 ) );
-		}
-		box get_edges( box& obj1, const box& obj2 )
-		{
-			return box::build_polygon( boost::assign::list_of( obj1.low_left )
-															( obj1.top_right) 
-															( obj2.low_left )
-															( obj2.top_right ) );
+			return box::build_polygon( boost::assign::list_of( obj1 )
+															 ( obj2 ) );
 		}
 	}
 	point::point( const int x, const int y )

@@ -151,7 +151,7 @@ macro( compile_project project_name source_pattern header_pattern build_type sol
 			message(STATUS "   - Creating shared library: ${project_name}")
 		endif(${VERBOSE})
 	elseif( "${build_type}" STREQUAL "BINARY"  )
-		add_executable( ${project_name} ${${project_name}_SOURCE_LIST})
+		add_executable( ${project_name} WIN32 ${${project_name}_SOURCE_LIST})
 		if(${VERBOSE})
 			message(STATUS "   - Creating binary file: ${project_name}")
 		endif(${VERBOSE})

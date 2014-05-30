@@ -16,6 +16,9 @@
 #include <boost/assign/list_of.hpp>
 #include <boost/shared_ptr.hpp>
 
+#undef min
+#undef max
+
 namespace storage
 {
 	template< class T >

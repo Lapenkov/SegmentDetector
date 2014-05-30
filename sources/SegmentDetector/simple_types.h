@@ -12,8 +12,7 @@ namespace storage
 	{
 		void update_edges( box& old, const point& to_include );
 		void update_edges( box& old, const box& to_include );
-		box get_edges( box& obj1, const point& obj2 );
-		box get_edges( box& obj1, const box& obj2 );
+		box get_edges( point& obj1, const point& obj2 );
 	}
 
 	struct point
