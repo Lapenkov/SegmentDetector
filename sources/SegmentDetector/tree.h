@@ -87,6 +87,7 @@ namespace storage
 				root_ = new vertex();
 				root_->children.push_back( new_left );
 				root_->children.push_back( new_right );
+				new_left->parent = new_right->parent = root_;
 				root_->resolve_edges();
 			}
 			else
@@ -129,7 +130,17 @@ namespace storage
 		if( to_split->is_leaf() )
 			quadratic_split< T* >( to_split->content, group1->content, group2->content );
 		else
+		{
 			quadratic_split< node< T >* >( to_split->children, group1->children, group2->children );
+			BOOST_FOREACH( vertex* child, group1->children )
+			{
+				child->parent = group1;
+			}
+			BOOST_FOREACH( vertex* child, group2->children )
+			{
+				child->parent = group2;
+			}
+		}
 
 		group1->resolve_edges();
 		group2->resolve_edges();
@@ -256,8 +267,12 @@ namespace storage
 		vertex* parent = current_v->parent;
 
 		current_v->children.push_back( child1 );
+		child1->parent = current_v;
 		if( child2 != NULL )
+		{
 			current_v->children.push_back( child2 );
+			child2->parent = current_v;
+		}
 		current_v->resolve_edges();
 
 		if( parent != NULL )
@@ -273,6 +288,7 @@ namespace storage
 				root_ = new vertex();
 				root_->children.push_back( new_left );
 				root_->children.push_back( new_right );
+				new_left->parent = new_right->parent = root_;
 				root_->resolve_edges();
 			}
 			else
