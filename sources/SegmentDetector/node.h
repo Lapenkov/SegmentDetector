@@ -39,8 +39,12 @@ namespace storage
 	void node< T >::resolve_edges()
 	{
 		std::list< point > all_points;
-		all_points.push_back( edges.low_left );
-		all_points.push_back( edges.top_right );
+
+		if( edges.low_left.is_defined() && edges.top_right.is_defined() )
+		{
+			all_points.push_back( edges.low_left );
+			all_points.push_back( edges.top_right );
+		}
 
 		if( is_leaf() )
 		{

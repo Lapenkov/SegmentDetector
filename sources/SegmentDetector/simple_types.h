@@ -17,12 +17,15 @@ namespace storage
 
 	struct point
 	{
+		static const int undefined_coord = -1000000009;
+
 		int x;
 		int y;
 
-		explicit point( const int x = 0, const int y = 0 );
+		explicit point( const int x = undefined_coord, const int y = undefined_coord );
 		const point& operator = ( const point& to );
 
+		bool is_defined() const;
 		bool in_polygon( const point& low_left, const point& top_right ) const;
 		bool in_polygon( const box& polygon ) const;
 		bool operator == ( const point& to ) const;

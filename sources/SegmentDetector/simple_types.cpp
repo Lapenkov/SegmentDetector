@@ -39,6 +39,10 @@ namespace storage
 		y = to.y;
 		return *this;
 	}
+	bool point::is_defined() const
+	{
+		return x != undefined_coord && y != undefined_coord;
+	}
 	bool point::in_polygon( const point& low_left, const point& top_right ) const
 	{
 		return ( *this >= low_left && *this <= top_right );
@@ -80,8 +84,8 @@ namespace storage
 	{
 	}
 	box::box()
-		: low_left( point( 0, 0 ) )
-		, top_right( point( 0, 0 ) )
+		: low_left( point() )
+		, top_right( point() )
 	{
 	}
 	bool box::in_polygon( const box& other_box ) const
@@ -94,16 +98,10 @@ namespace storage
 	}
 	unsigned box::overlap_square( const box& other_box ) const
 	{
-		if( low_left.in_polygon( other_box ) && !top_right.in_polygon( other_box ) )
-			return ( other_box.top_right.x - low_left.x ) * ( other_box.top_right.y - low_left.y );
-		else if( top_right.in_polygon( other_box ) && !low_left.in_polygon( other_box ) )
-			return ( top_right.x - other_box.low_left.x ) * ( top_right.y - other_box.low_left.y );
-		else if( in_polygon( other_box ) )
-			return square();
-		else if( other_box.in_polygon( *this ) )
-			return other_box.square();
-		else
-			return 0;
+		int xside = std::max( low_left.x, other_box.low_left.x ) - std::min( top_right.x, other_box.top_right.x );
+		int yside = std::max( low_left.y, other_box.low_left.y ) - std::min( top_right.y, other_box.top_right.y );
+
+		return ( xside * yside ) < 0 ? 0 : ( xside * yside );
 	}
 	unsigned box::square() const
 	{
