@@ -1,5 +1,4 @@
 SegmentDetector
 ===============
 
-Based on R-TREE
- 
+Application with GUI which represents the R-TREE implementation for fast detecting segments in a polygon.
